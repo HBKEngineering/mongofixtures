@@ -102,16 +102,20 @@ func (l *Session) importList(value yaml.List) interface{} {
 
 func (l *Session) importScalar(value yaml.Scalar) interface{} {
 	isHolder, _ := regexp.Match("^__(.*)__$", []byte(value))
+	isStringHolder, _ := regexp.Match("^___(.*)___$", []byte(value))
+	stringValue := string(value)
 
 	var result interface{}
 
 	if isHolder {
-		result = l.getObjectId(string(value))
+		result = l.getObjectId(stringValue)
+	} else if isStringHolder {
+		result = l.getObjectId(stringValue).Hex()
 	} else {
 
-		resBool, isBool := strconv.ParseBool(string(value))
-		resFloat, isFloat := strconv.ParseFloat(string(value), 32)
-		resInt, isInt := strconv.ParseInt(string(value), 10, 32)
+		resBool, isBool := strconv.ParseBool(stringValue)
+		resFloat, isFloat := strconv.ParseFloat(stringValue, 32)
+		resInt, isInt := strconv.ParseInt(stringValue, 10, 32)
 
 		if isInt == nil {
 			return resInt
