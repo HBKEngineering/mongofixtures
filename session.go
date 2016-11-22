@@ -108,6 +108,8 @@ func (l *Session) importScalar(value yaml.Scalar) interface{} {
 	var result interface{}
 
 	if isStringHolder {
+		stringValue = stringValue[1 : len(stringValue)-1] //trim off the extra _'s
+
 		result = l.getObjectId(stringValue).Hex()
 	} else if isHolder {
 		result = l.getObjectId(stringValue)
