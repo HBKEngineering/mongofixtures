@@ -107,10 +107,10 @@ func (l *Session) importScalar(value yaml.Scalar) interface{} {
 
 	var result interface{}
 
-	if isHolder {
-		result = l.getObjectId(stringValue)
-	} else if isStringHolder {
+	if isStringHolder {
 		result = l.getObjectId(stringValue).Hex()
+	} else if isHolder {
+		result = l.getObjectId(stringValue)
 	} else {
 
 		resBool, isBool := strconv.ParseBool(stringValue)
