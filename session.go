@@ -2,11 +2,12 @@
 package mongofixtures
 
 import (
-	"github.com/kylelemons/go-gypsy/yaml"
-	"labix.org/v2/mgo"
-	"labix.org/v2/mgo/bson"
 	"regexp"
 	"strconv"
+
+	"github.com/kylelemons/go-gypsy/yaml"
+	mgo "gopkg.in/mgo.v2"
+	"gopkg.in/mgo.v2/bson"
 )
 
 // A session holds the mongo session (based on labix.org/v2/mgo).
